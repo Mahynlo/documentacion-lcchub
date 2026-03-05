@@ -1,0 +1,69 @@
+---
+title: Despliegue
+description: Explicar cómo mantener, actualizar y operar la aplicación de forma segura y eficiente.
+---
+
+El deploy se realiza accediendo al servidor de producción a través de SSH. Se ingresa al directorio el cual contiene dos repositorios, uno para el frontend y otro para el backend. Para actualizar la aplicación, se debe hacer un git pull en cada uno de los repositorios.
+
+#### 1. Primero trae los cambios:
+:::tip[Recomendado]
+Hacer un git pull para traer cambios.
+:::
+```bash
+ git pull
+```
+
+#### 2. Verificar la versión actual de Node.js con el siguiente comando en caso de build para el backend:
+```bash
+node --version
+# o
+node -v
+```
+#### 3. Lista las versiones de node instaladas en el servidor:
+```bash
+ nvm ls 
+```
+#### 4.Cambia de version de node en el servidor:
+```bash
+ nvm use <numero de la version de node>
+```
+:::caution[Cuidado]
+Si solo se ara un build al frontend no son necesarios los comandos 2,3 y 4 pero simpre revisa la version de node necesaria.
+
+:::
+#### 5. Para hacerle build al frontend y al backend, se debe correr el siguiente comando:
+```bash
+npm run build
+```
+
+## Modo Produccion
+
+Para correr la aplicación en modo producción se utiliza pm2 para que la aplicación siga corriendo en el servidor aunque se cierre la terminal.
+
+Corre desde el directorio raíz de cada repositorio:
+
+Backend:
+```bash
+pm2 start npm --name "lcchub-backend" -- start # Primero el backend
+pm2 logs # Para monitorear que todo esté funcionando correctamente
+```
+Frontend:
+```bash
+pm2 start npm --name "lcchub-frontend" -- start # Luego el frontend
+pm2 logs # Para monitorear que todo esté funcionando correctamente
+```
+## Reinicio automatico en caso de fallo
+Para asegurar que la aplicación se reinicie automáticamente en caso de fallo, se debe correr el siguiente comando:
+```bash
+pm2 startup
+pm2 save
+```
+## Detener la aplicacion
+Para detener la aplicación, se debe correr el siguiente comando:
+```bash
+pm2 ls # Para ver los procesos corriendo
+pm2 stop lcchub-backend
+pm2 stop lcchub-frontend
+```
+
+Para más información sobre cómo utilizar pm2, revisa la documentación oficial.

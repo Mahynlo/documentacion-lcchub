@@ -1,0 +1,61 @@
+---
+title: Arquitectura de la aplicación
+description: Explicar cómo mantener, actualizar y operar la aplicación de forma segura y eficiente.
+---
+
+## Diagrama
+![Diagrama de arquitectura](/images/arquitectura.png)
+
+
+Cuando un usuario realiza un GET request a la dirección https://lcc-hub.unison.mx, el DNS target gestionado por el área de informática redirige la solicitud a la IP de un servidor dentro de la red Unison.
+
+En dicho servidor, se ejecuta un servidor Nginx, que se encarga de gestionar y dirigir el tráfico hacia la aplicación. Nginx redirige las solicitudes al servidor de Next.js, donde corre el frontend de la aplicación.
+
+El frontend realiza requests hacia un servidor Strapi, que funciona como CMS, expone los endpoints de la API y almacena los datos en una base de datos SQLite.
+
+Adicionalmente, la aplicación realiza requests a un servidor legacy de un proyecto anterior, que contiene datos de alumnos y materias almacenados en Firebase.
+
+Por último, la autenticación de la aplicación se gestiona mediante una SPA de Azure AD, a la cual se accede a través de un token proporcionado por el área de informática.
+
+## Descripción de componentes principales
+
+- **Frontend**: Next.js / React / Tailwind CSS / TypeScript  
+- **Backend**: Node.js con Strapi CMS  
+- **Autenticación**: Azure Active Directory (AD)  
+- **Base de datos**: Firebase y SQLite  
+- **Servicios externos**: Azure (autenticación) y Strapi  
+
+---
+
+## Dependencias críticas: frameworks, librerías y versiones recomendadas
+
+### Backend
+
+El backend utiliza **Strapi** como gestor de contenido.  
+
+## ¿Que es strapi?
+
+Strapi es un CMS headless de codigo abierto basado en Node.js que permite crear  APIs rapidamente medioante una intaerfaze grafica ideal para gestionar constenido sin proegramar el backend desde cero. El proeyecto de LCC-HUB lo utiliza para manejar el contenido que se muestra en la pagina priencipal y diversas secciones de esta se usa para gestionar las noticias, los eventos, las fotos (Galeria) y las notas.
+
+## ¿Que es una coleccion?
+Una coleccion (Collection Type) en Strapi es una estructura repetitiva utilizada para modelar y almacenar multiples entradas del mismo tipo, como articulos de blog, produectos o usuarios en el caso de LCC-HUB es usado para las notas y noticias, los eventos y las imagenes.
+
+Para crear una nueva colección, modificar las existentes o realizar configuraciones, es necesario ejecutar el backend en modo desarrollo.
+
+:::caution
+El backend **requiere la versión 20.13.1 de Node.js** para funcionar correctamente y para generar el *build*.  
+:::
+
+Puedes administrar las versiones de Node.js en el servidor usando **nvm**.
+
+Priemero se defienen los campos(atributos) que tendran los datos, como texto, imagenes, fechas o relaciones.
+Api Automatica al crear una cloeccion y sus atributos Strapi genera automaticamente los edpoints de la API para contruir esos datos.
+
+:::caution
+Strapi requiere permisos para poder mostrar el enponts asi que debera otorgar permisos ya sea de lectura o escritura dependiendo del caso de uso.  
+:::
+
+
+
+
+
