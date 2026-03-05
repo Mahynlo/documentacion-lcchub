@@ -1,0 +1,46 @@
+---
+title: Cambios en el codigo 
+description: Explicar cómo realizar cambios de codigo, actualizar y operar estos cambios en el frontend.
+---
+
+
+Y siga los pasos de readme del reposistorio que aqui tambien se describen a continuacion 
+Para mantener un control de versiones adecuado, se recomienda utilizar Git y crear un fork del repositorio, trabajando desde este fork.
+Todas las modificaciones futuras deben realizarse mediante un pull request desde el fork, el cual deberá ser aprobado por el equipo de CC-unison.
+Los cambios realizados en el repositorio se deben actualizar en el servidor utilizando el comando:
+```bash
+git pull
+```
+
+## Convenciones de código: 
+- linting, formateo, nomenclatura, ramas de Git.
+
+
+### Convencion de Commits sugeriada
+
+:::tip[Recomendado]
+El estandar para un commit sugerido es **Conventional Commits**. 
+:::
+Ejemplo:
+```bash
+feat: se agregaron nuevos tags y prioridad en el orden de anuncios
+```
+Se compoene de:
+```bash
+<tipo>[alcance opcional]: <descripción>
+```
+Donde:feat → Tipo de cambio: indica que agregaste una nueva funcionalidad (feature).
+se agregaron nuevos tags y prioridad en el orden de anuncios → Mensaje descriptivo, explica qué hiciste.
+
+Otros ejemplos de commits
+
+| Tipo         | Significado                                                  |
+| ------------ | ------------------------------------------------------------ |
+| **feat**     | Nueva funcionalidad                                          |
+| **fix**      | Corrección de un error (*bug fix*)                           |
+| **docs**     | Cambios en documentación                                     |
+| **style**    | Cambios que no afectan el código (formato, espacios, estilo) |
+| **refactor** | Refactorización de código, sin cambiar funcionalidad         |
+| **perf**     | Mejora de rendimiento                                        |
+| **test**     | Agregar o modificar tests                                    |
+| **chore**    | Tareas de mantenimiento, configuraciones, scripts            |

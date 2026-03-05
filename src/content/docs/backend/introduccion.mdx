@@ -1,0 +1,35 @@
+---
+title: Introducción
+description: Descripcion de incio al backend.
+---
+Bienvenid@ a la guia de mantenimiento de LCC-HUB fue creada con el proepeosito de mantenimeiento de la pagina esta 
+seccion es enfoecada al backend aqui se describe lo necesario para poder enetender su estructura, arquitectura y 
+Heramintas usadas en el proeceso de construccion y modificaciones a futro de la apalicacion.
+
+## Conceptos de Herramientas 
+Para poder modifcar el backend de LCC-HUB se requeire algo de conosimientos en una herraminta llamada  
+**Strapi** que se usa  como gestor de contenido en el backend de la pagina y tambien se usa frirebase que 
+se usa para alamacenar los datos de lo alumnos de LCC.
+
+## ¿Que es strapi?
+
+Strapi es un CMS headless de codigo abierto basado en Node.js que permite crear  APIs rapidamente medioante una intaerfaze grafica ideal para gestionar constenido sin proegramar el backend desde cero. El proeyecto de LCC-HUB lo utiliza para manejar el contenido que se muestra en la pagina priencipal y diversas secciones de esta se usa para gestionar las noticias, los eventos, las fotos (Galeria) y las notas.
+
+## ¿Que es una coleccion en strapi?
+Una coleccion (Collection Type) en Strapi es una estructura repetitiva utilizada para modelar y almacenar multiples entradas del mismo tipo, como articulos de blog, produectos o usuarios en el caso de LCC-HUB es usado para las notas y noticias, los eventos y las imagenes.
+
+## ¿Que es firebase?
+Firebase es una plataforma de desarrollo de aplicaciones móviles y web creada por Google, que funciona como un Backend as a Service (BaaS). Ofrece herramientas en la nube para crear, lanzar y escalar aplicaciones rápidamente, eliminando la necesidad de gestionar servidores propios. Incluye servicios como bases de datos en tiempo real (Firestore), autenticación de usuarios, almacenamiento y funciones serverless.
+
+### Características principales de Firebase:
+Base de datos en tiempo real (NoSQL): Cloud Firestore permite sincronizar datos entre clientes al instante.
+Autenticación: Firebase Authentication simplifica el inicio de sesión con correo, teléfono o redes sociales (Google, Facebook, etc.).
+Hosting: Firebase Hosting es seguro y rápido, ideal para aplicaciones web y contenido estático.
+Cloud Functions: Permite ejecutar código backend en respuesta a eventos sin gestionar servidores.
+Analíticas y Mensajería: Google Analytics 4 (GA4) ayuda a medir el comportamiento del usuario, y Firebase Cloud Messaging (FCM) envía notificaciones push. 
+
+
+
+
+
+

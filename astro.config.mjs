@@ -14,16 +14,29 @@ export default defineConfig({
 					items: [
 						// Each item here is one entry in the navigation menu.
 						{ label: 'Introduccion', slug: 'guides/introduccion' },
-						{ label: 'Arquitectura de la aplicación', slug: 'guides/arquitectura' },
 						{ label: 'Código fuente', slug: 'guides/codigo-fuente' },
-						{ label: 'Actualización de contenido', slug: 'guides/actualizacion-de-contenido' },
+						{ label: 'Arquitectura de la aplicación', slug: 'guides/arquitectura' },
 						{ label: 'Despliegue (Deployment)', slug: 'guides/despliegue' },
+						
 					],
 				},
 				{
 					label: 'Frontend',
 					items: [
 						{ label: 'Introducción', slug: 'forntend/introduccion' },
+						{ label: 'Instalacion de Fontend', slug: 'forntend/instalacion' },
+						{ label: 'Contribuciones de codigo', slug: 'forntend/cambios' },
+						{ label: 'Actualización de contenido', slug: 'forntend/actualizacion-de-contenido' },
+						
+					],
+				},
+				{
+					label: 'Backend',
+					items: [
+						{ label: 'Introducción', slug: 'backend/introduccion' },
+						{ label: 'Instalacion de Backend', slug: 'backend/instalacion' },
+						{ label: 'Contribuciones de codigo', slug: 'backend/cambios' },
+						
 						
 					],
 				},
