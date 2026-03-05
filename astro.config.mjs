@@ -17,46 +17,42 @@ export default defineConfig({
 						{ label: 'Código fuente', slug: 'guides/codigo-fuente' },
 						{ label: 'Arquitectura de la aplicación', slug: 'guides/arquitectura' },
 						{ label: 'Despliegue (Deployment)', slug: 'guides/despliegue' },
-						
+						{
+							label: 'Frontend',
+							items: [
+								{ label: 'Introducción', slug: 'forntend/introduccion' },
+								{ label: 'Instalacion de Fontend', slug: 'forntend/instalacion' },
+								{ label: 'Contribuciones de codigo', slug: 'forntend/cambios' },
+								{ label: 'Actualización de contenido', slug: 'forntend/actualizacion-de-contenido' },
+							],
+						},
+						{
+							label: 'Backend',
+							items: [
+								{ label: 'Introducción', slug: 'backend/introduccion' },
+								{ label: 'Instalacion de Backend', slug: 'backend/instalacion' },
+								{ label: 'Contribuciones de codigo', slug: 'backend/cambios' },
+							],
+						},
+						{
+							label: 'Asistente Virtual',
+							items: [
+								{ label: 'Introducción', slug: 'asistente_virtual/introduccion' },
+							],
+						},
+						{
+							label: 'Programa extractor',
+							items: [
+								// Each item here is one entry in the navigation menu.
+								{ label: 'Introduccion', slug: 'progama_extractor/introduccion' },
+								{ label: 'Arquitectura', slug: 'progama_extractor/arquitectura_app' },
+							],
+						},
 					],
 				},
 				{
-					label: 'Frontend',
-					items: [
-						{ label: 'Introducción', slug: 'forntend/introduccion' },
-						{ label: 'Instalacion de Fontend', slug: 'forntend/instalacion' },
-						{ label: 'Contribuciones de codigo', slug: 'forntend/cambios' },
-						{ label: 'Actualización de contenido', slug: 'forntend/actualizacion-de-contenido' },
-						
-					],
-				},
-				{
-					label: 'Backend',
-					items: [
-						{ label: 'Introducción', slug: 'backend/introduccion' },
-						{ label: 'Instalacion de Backend', slug: 'backend/instalacion' },
-						{ label: 'Contribuciones de codigo', slug: 'backend/cambios' },
-						
-						
-					],
-				},
-				
-				{
-					label: 'Asistente Virtual',
-					items: [
-						{ label: 'Introducción', slug: "asistente_virtual/introduccion" },
-						
-					],
-				},
-				{
-					label:'Programa extractor',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Introduccion', slug: 'progama_extractor/introduccion' },
-						{label: 'Arquitectura',slug:'progama_extractor/arquitectura_app' }
-						
-					],
-					
+					label: 'Guia de uso',
+					items: [{ label: 'Introduccion', slug: 'guia-de-uso/introduccion' }],
 				},
 				{
 					label: 'Reference',
