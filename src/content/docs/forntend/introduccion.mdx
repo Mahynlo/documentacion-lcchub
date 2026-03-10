@@ -1,48 +1,54 @@
 ---
-title: Introducción
-description: Descripcion de incio al forntend.
+title: Introducción al Frontend
+description: Guía técnica sobre la estructura, herramientas y mantenimiento del frontend de LCC-HUB.
 ---
 
-Bienvenid@ a la guia de mantenimiento de LCC-HUB fue creada con el proepeosito de mantenimeiento 
-de la pagina esta seccion es enfoecada al frontend aqui se describe lo necesario para poder enetender 
-su estructura, arquitectura y Heramintas usadas en el proeceso de construccion y modificaciones a futro 
-de la apalicacion.
 
-## Conceptos de Herramientas 
+¡Bienvenido/a a la guía de mantenimiento de **LCC-HUB**! Este espacio ha sido diseñado con el propósito de facilitar la gestión y evolución de la plataforma. 
 
-Para poder modifcar el frontend de LCC-HUB se requeire algo de conosimientos en Html,javascript, y css tambien 
-en el suso de frameworks como lo son next.js y tambien en el suso de biblioteca de javascript como React y deribados 
-para ser suadas en el ecosistema de Reat ademas de tener conceptos de lo que es node.js y instaladores de 
-paquetes como npm. A continuacion se describen que son exactamentes lo que se necesita saber.
+Esta sección se enfoca exclusivamente en el **Frontend**. Aquí encontrarás los detalles necesarios para comprender su estructura, la arquitectura elegida y las herramientas utilizadas durante el proceso de construcción, permitiendo que las futuras modificaciones se realicen de manera fluida y estandarizada.
 
-## Heramintas usadas para el frontend 
+---
 
-### -NEXT.JS
-Si te preguntas que es Next.js es un framework de React de código abierto desarrollado por Vercel que 
-facilita la creación de aplicaciones web rápidas y escalables. Ofrece renderizado híbrido (servidor y cliente), 
-optimización automática, enrutamiento basado en archivos y soporte para funciones serverless, lo que mejora
- el SEO y el rendimiento. Esta por lo menos es una descripcion que se pude encontrar en internet y se recomienda 
- entender como es que fuenciona este framework.
+## Requisitos de Conocimiento
 
-### -REACT 
-Si te preguntas que es React es una biblioteca de JavaScript de código abierto, creada por Facebook en 2013, diseñada 
-específicamente para construir interfaces de usuario (UI) interactivas, rápidas y modulares. Se basa en componentes 
-reutilizables y utiliza un Virtual DOM para optimizar el rendimiento al actualizar solo las partes necesarias 
-de la página, ideal para aplicaciones de una sola página (SPA).Esta por lo menos es una descripcion
-que se pude encontrar en internet y se recomienda entender como es que fuenciona esta biblioteca de JavaScript.
+Para colaborar en el desarrollo de LCC-HUB, es fundamental contar con conocimientos sólidos en el ecosistema moderno de JavaScript. Te recomendamos estar familiarizado con:
 
-### -NODE.JS
-Si te preguntas que es Node.js es un entorno de ejecución de código abierto y multiplataforma, basado 
-en el motor V8 de Google Chrome, que permite ejecutar código JavaScript en el servidor, fuera del navegador web. 
-Es ideal para aplicaciones escalables, en tiempo real (chats, streaming) y eficientes, utilizando un modelo de 
-entrada/salida asíncrono y no bloqueante.Esta por lo menos es una descripcion
-que se pude encontrar en internet y se recomienda entender como es que fuenciona el entorno de ejecucion para JavaScript.
+* **Lenguajes base:** HTML5, CSS3 y JavaScript (ES6+).
+* **Frameworks y Librerías:** React y Next.js.
+* **Gestión de Estilos:** CSS orientado a utilidades (Tailwind CSS).
+* **Entorno de Ejecución:** Node.js y gestores de paquetes como `npm` o `pnpm`.
 
-### -Tailwind CSS 
+---
 
-Si te preguntas que es Tailwind CSS es un framework de CSS "utility-first" (prioridad a la utilidad) que permite diseñar sitios web personalizados rápidamente directamente en el HTML, utilizando clases predefinidas como flex, pt-4 o text-center. A diferencia de Bootstrap, no proporciona componentes predefinidos, lo que ofrece mayor flexibilidad y un diseño único sin salir de tu archivo de marcado.
+## Stack Tecnológico
+
+A continuación, se describen las tecnologías principales que sostienen la interfaz de LCC-HUB:
+
+### Next.js (Framework Principal)
+Es un framework de **React** de código abierto desarrollado por Vercel. Lo utilizamos porque facilita la creación de aplicaciones web rápidas y escalables mediante:
+* **Renderizado Híbrido:** Soporte para SSR (Server Side Rendering) y SSG (Static Site Generation).
+* **Optimización Automática:** Manejo eficiente de imágenes, fuentes y scripts.
+* **Enrutamiento basado en archivos:** Simplifica la creación de nuevas secciones en la plataforma.
+
+
+
+### React
+Es la biblioteca base para la construcción de interfaces de usuario modulares. LCC-HUB se basa en una arquitectura de **componentes reutilizables**, lo que permite mantener un código limpio y fácil de testear. El uso del **Virtual DOM** asegura que las actualizaciones de la interfaz sean altamente eficientes.
+
+### Tailwind CSS
+A diferencia de los frameworks de CSS tradicionales, Tailwind es un framework de **utilidades de bajo nivel**. Esto nos permite:
+* Diseñar interfaces personalizadas sin salir del archivo HTML/JSX.
+* Mantener un bundle de CSS extremadamente pequeño y optimizado.
+* Garantizar la consistencia visual mediante un sistema de diseño predefinido (espaciados, colores, tipografías).
+
+### Node.js
+Es el entorno de ejecución que nos permite utilizar herramientas de desarrollo modernas en el lado del servidor. Es esencial para gestionar las dependencias del proyecto y ejecutar los scripts de compilación (build) y despliegue.
+
+---
+
 :::note
-Estos concepto son basicos para entender como esta cosntruido LCC-HUB asi que se suguiere saber que es o tener nociones basicas.
+Comprender estos conceptos es vital para navegar el código de LCC-HUB. Si eres nuevo en alguna de estas tecnologías, te sugerimos consultar su documentación oficial antes de realizar cambios profundos en la arquitectura.
 :::
 
 

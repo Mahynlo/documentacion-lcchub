@@ -1,34 +1,54 @@
 ---
-title: Introducción
-description: Descripcion de incio al backend.
+title: Introducción al Backend
+description: Guía técnica sobre el manejo de contenidos y gestión de datos en el backend de LCC-HUB.
 ---
-Bienvenid@ a la guia de mantenimiento de LCC-HUB fue creada con el proepeosito de mantenimeiento de la pagina esta 
-seccion es enfoecada al backend aqui se describe lo necesario para poder enetender su estructura, arquitectura y 
-Heramintas usadas en el proeceso de construccion y modificaciones a futro de la apalicacion.
 
-## Conceptos de Herramientas 
-Para poder modifcar el backend de LCC-HUB se requeire algo de conosimientos en una herraminta llamada  
-**Strapi** que se usa  como gestor de contenido en el backend de la pagina y tambien se usa frirebase que 
-se usa para alamacenar los datos de lo alumnos de LCC.
+¡Bienvenido/a a la sección de **Backend** de LCC-HUB! Esta guía está diseñada para orientarte en el mantenimiento y la evolución del núcleo lógico de la plataforma.
 
-## ¿Que es strapi?
+A continuación, se describen la arquitectura y las herramientas utilizadas para la gestión de contenidos y el almacenamiento de datos. El objetivo es proporcionar el contexto necesario para realizar modificaciones futuras de manera segura y organizada.
 
-Strapi es un CMS headless de codigo abierto basado en Node.js que permite crear  APIs rapidamente medioante una intaerfaze grafica ideal para gestionar constenido sin proegramar el backend desde cero. El proeyecto de LCC-HUB lo utiliza para manejar el contenido que se muestra en la pagina priencipal y diversas secciones de esta se usa para gestionar las noticias, los eventos, las fotos (Galeria) y las notas.
+---
 
-## ¿Que es una coleccion en strapi?
-Una coleccion (Collection Type) en Strapi es una estructura repetitiva utilizada para modelar y almacenar multiples entradas del mismo tipo, como articulos de blog, produectos o usuarios en el caso de LCC-HUB es usado para las notas y noticias, los eventos y las imagenes.
+## Stack Tecnológico del Servidor
 
-## ¿Que es firebase?
-Firebase es una plataforma de desarrollo de aplicaciones móviles y web creada por Google, que funciona como un Backend as a Service (BaaS). Ofrece herramientas en la nube para crear, lanzar y escalar aplicaciones rápidamente, eliminando la necesidad de gestionar servidores propios. Incluye servicios como bases de datos en tiempo real (Firestore), autenticación de usuarios, almacenamiento y funciones serverless.
+El backend de LCC-HUB no utiliza una arquitectura tradicional desde cero; en su lugar, se apoya en soluciones de **Headless CMS** y **BaaS (Backend as a Service)** para maximizar la eficiencia:
 
-### Características principales de Firebase:
-Base de datos en tiempo real (NoSQL): Cloud Firestore permite sincronizar datos entre clientes al instante.
-Autenticación: Firebase Authentication simplifica el inicio de sesión con correo, teléfono o redes sociales (Google, Facebook, etc.).
-Hosting: Firebase Hosting es seguro y rápido, ideal para aplicaciones web y contenido estático.
-Cloud Functions: Permite ejecutar código backend en respuesta a eventos sin gestionar servidores.
-Analíticas y Mensajería: Google Analytics 4 (GA4) ayuda a medir el comportamiento del usuario, y Firebase Cloud Messaging (FCM) envía notificaciones push. 
+1.  **Strapi:** Gestor de contenido (CMS) para la administración dinámica de la interfaz.
+2.  **Firebase:** Plataforma para la gestión de datos de usuarios (alumnos) y servicios en la nube.
 
+---
 
+## Strapi (Gestión de Contenido)
+
+**Strapi** es un CMS Headless de código abierto basado en **Node.js**. Permite crear APIs de forma rápida mediante una interfaz gráfica intuitiva, eliminando la necesidad de programar manualmente cada endpoint.
+
+### Implementación en LCC-HUB
+En este proyecto, Strapi es el motor que alimenta la información dinámica de la página. Se utiliza específicamente para gestionar:
+* **Noticias:** Publicaciones y anuncios recientes.
+* **Eventos:** Calendario y actividades de la comunidad.
+* **Galería:** Gestión de imágenes y recursos visuales.
+* **Notas:** Información académica y avisos importantes.
+
+### ¿Qué es una Colección (Collection Type)?
+En el ecosistema de Strapi, una **Colección** es una estructura repetitiva diseñada para modelar datos del mismo tipo. En LCC-HUB, las colecciones nos permiten organizar de forma tabular las entradas de noticias, eventos e imágenes, facilitando su consumo desde el frontend mediante peticiones REST o GraphQL.
+
+---
+
+## Firebase (BaaS)
+
+**Firebase** es la plataforma de Google que utilizamos como infraestructura para servicios críticos. A diferencia de Strapi, Firebase se encarga de la lógica que requiere mayor seguridad y escalabilidad en tiempo real.
+
+### Servicios utilizados:
+* **Cloud Firestore:** Base de datos NoSQL para almacenar y sincronizar los datos de los alumnos de LCC.
+* **Authentication:** Gestión de identidades y acceso seguro a la plataforma.
+* **Cloud Functions:** Ejecución de lógica de backend en respuesta a eventos específicos sin gestionar servidores físicos.
+* **Hosting & Storage:** Almacenamiento de archivos pesados y despliegue de activos estáticos.
+
+---
+
+:::important
+Para realizar cambios en el Backend, asegúrate de tener acceso a las consolas de administración tanto de Strapi (entorno local/producción) como de Firebase Console. Cualquier modificación en la estructura de las colecciones de Strapi debe verse reflejada en las consultas del Frontend para evitar errores de renderizado.
+:::
 
 
 

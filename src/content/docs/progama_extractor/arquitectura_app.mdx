@@ -1,20 +1,22 @@
 ---
 title: Arquitectura
-description: Arquitectura de la aplicacion de estraccion de datos para lccHub.
+description: Diseño estructural y flujo de datos del extractor para LCCHUB.
 ---
 
-## Diagrama de flujo de uso 
+## Diagrama de Flujo de Usuario
 ![Flujo de uso](../../../assets/images/arquitectura_extractor.png)
 
+El diagrama anterior ilustra el proceso operativo del sistema. El **módulo de extracción** representa el núcleo de la aplicación, diseñado para filtrar grandes volúmenes de datos oficiales. 
 
-En la imagen que se presenta se puede apresiar como es el flujo de uso de la palicacion este flujo de uso de la aplicacion el priencipal en el moduelo de extraccion de datos de la aplicacion que este el el priencipal y mas importante ya que sera usado para extraer datos oficiales de un archivo gigante con todaos los alumnos en la carrera pero nosotros solo necesistamos extraer la informacion de los que estan firmados hasta la fecha.
+Su función principal es realizar una "limpieza inteligente": de un conjunto masivo de registros de la carrera, el sistema identifica y extrae exclusivamente la información de los alumnos que han otorgado su firma y autorización hasta la fecha.
 
-El **Gestor de Archivos LCC HUB**, una aplicación diseñada para facilitar la gestión, procesamiento y validación de archivos CSV/Excel del sistema LCC Hub.
+---
 
-Esta herramienta te permite:
+## Capacidades del Gestor de Archivos LCCHUB
 
-- ✅ **Gestionar Autorizaciones**: Buscar alumnos y marcar quiénes autorizaron el uso de sus datos personales
-- 📂 **Cargar Datos Oficiales**: Importar archivos CSV/Excel con información de alumnos
-- 🔧 **Procesar Archivos**: Ordenar, limpiar, comparar y extraer datos de archivos
-- 📊 **Validar Estructuras**: Verificar que los archivos cumplan con el formato requerido
+El **Gestor de Archivos LCCHUB** es una solución integral para el procesamiento y validación de datasets en formatos CSV y Excel. Sus capacidades principales incluyen:
 
+* **Gestión de Autorizaciones:** Búsqueda avanzada de alumnos y control de estados de consentimiento para el uso de datos personales.
+* **Ingesta de Datos:** Carga simplificada de archivos maestros con información estudiantil.
+* **Procesamiento y Transformación:** Funciones de ordenamiento, limpieza y comparación de registros para garantizar la homogeneidad de la información.
+* **Validación Estructural:** Motor de verificación que asegura que los archivos cumplan con el esquema y formato requeridos por el sistema central.

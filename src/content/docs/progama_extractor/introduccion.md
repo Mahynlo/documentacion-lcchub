@@ -1,11 +1,18 @@
 ---
 title: Introducción
-description: Introducción al asistente virtual.
+description: Justificación y objetivos del asistente virtual para LCCHUB.
 ---
 
+## Necesidad de creación del programa
 
-## Necesisdad de cracion de este proegrama
+Este programa surge de la necesidad crítica de mantener actualizados los datos de los estudiantes dentro del ecosistema de **LCCHUB**. Anteriormente, el flujo de información dependía enteramente de la coordinación administrativa, lo que generaba retrasos en el envío y procesamiento de datos para el sistema.
 
-La necesidad de creaccion de este proegaram atiende a la necesidad de mantener los datos de los estudientaes actualizados ya que se depende de cordinacion para el envio de tados usados en el sistema de lcc es necesario una rapida extraccion de estos datos por lo que este proegaa soluciona y facilita su extraccion de forma rapida y eficiente tanto para el usuario obejetio como para el responsable de mantenimiento de la pagina de LCCHUB.
+Esta herramienta soluciona dicho problema al permitir una **extracción de datos rápida y eficiente**, beneficiando tanto al usuario final como al responsable de mantenimiento de la plataforma.
 
-La aplicacion tambien permite que se mantega un historial de los estudiantes que ya an firado y mantener estos datos actualizados ya que antes no se tenia un registro y se de pendia de hacerlo a mano ahora se pude mantener un registro sin perdida de estudiantes frimados esto permite y agiliza la actualizacion de datos y nos da informacion mas rapido y efieciente.
+### Optimización y Registro Histórico
+
+A diferencia del proceso anterior, que se realizaba de forma manual y era propenso a errores o pérdida de información, esta aplicación introduce mejoras sustanciales:
+
+* **Historial Automatizado:** Mantiene un registro íntegro de los estudiantes que han firmado.
+* **Integridad de Datos:** Elimina el riesgo de pérdida de registros al digitalizar el proceso de captura.
+* **Agilidad Operativa:** Reduce los tiempos de espera, proporcionando información precisa en tiempo real para la toma de decisiones.

@@ -1,6 +1,6 @@
 ---
-title: Instalacion del frontend
-description: Explicar cómo Instalar, actualizar y operar el frontend.
+title: Instalación del Frontend
+description: Guía paso a paso para configurar el entorno de desarrollo local de LCC-HUB.
 ---
 
 ### Frontend instalacion en local
@@ -15,19 +15,31 @@ una ves instalado dirigase a la carpeta con:
 cd lcchub-dev
 ```
 
+
+### Requisitos Previos
+Antes de proceder con la instalación de paquetes, asegúrate de cumplir con las versiones de software compatibles para evitar errores de compilación o conflictos entre dependencias:
+
+Node.js: Se recomienda la versión v22.1.0 (o versiones LTS superiores).
+
+NPM: Una versión actualizada (generalmente se instala automáticamente junto con Node.js).
+
+
 :::note
 Es necesario que cuante con una versión de node para esto se recomienda la `node v22.1.0` tengalo en cuanta
-para la instalacion de paquetes tambien una version actualizada de npm.
+para la instalacion de paquetes tambien una version actualizada de npm.Si utilizas un gestor de versiones como nvm, puedes cambiar rápidamente a la versión necesaria con el comando nvm use 22.
 :::
 
-instale dependencias con el siguinte comando:
+Ejecuta el siguiente comando para instalar todas las bibliotecas y módulos necesarios definidos en el archivo package.json:
 ```bash
 npm install
 ```
-### Creacion de archivo de variables de entorno
-Ademas de tambien es requeirda un archivo de variables de entonot un `.env` en el cual se colocaran 
-credenciales necesarias:
+### Archivo de Variables de Entorno (.env)
+El proyecto requiere de ciertas credenciales para conectarse a los servicios de Azure (para la autenticación) y Firebase (para la base de datos de alumnos).
 
+Debes crear un archivo llamado **.env** o **.env.local** en la raíz del proyecto y copiar el siguiente esquema, reemplazando las x con las credenciales reales:
+:::caution
+Seguridad: Nunca subas el archivo .env al repositorio de GitHub. Este archivo contiene credenciales sensibles y debe estar incluido en tu archivo .gitignore.
+:::
 ```.env
 NEXT_PUBLIC_AZURE_CLIENT_ID=xxxx-xx-x
 NEXT_PUBLIC_AZURE_AUTHORITY=https://login.microsoftonline.com/xxxx-xx-x
@@ -41,3 +53,12 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=xxxx-xx-x
 NEXT_PUBLIC_FIREBASE_APP_ID=xxxx-xx-x
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=xxxx-xx-x
 ```
+
+### Ejecución del Proyecto
+Una vez configuradas las variables y las dependencias, inicia el servidor de desarrollo local:
+
+```bash
+npm run dev
+```
+
+La aplicación estará disponible para previsualización en: http://localhost:3000.
