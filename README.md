@@ -47,3 +47,17 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+
+## Deploy en GitHub Pages con GitHub Actions
+
+Este repositorio ya incluye el workflow [deploy.yml](.github/workflows/deploy.yml) para publicar automaticamente en GitHub Pages cuando hay push a main.
+
+Pasos necesarios en GitHub:
+
+1. Ir a Settings > Pages.
+2. En Build and deployment seleccionar Source: GitHub Actions.
+3. Hacer push a main para disparar el workflow.
+
+URL esperada de despliegue:
+
+- https://mahynlo.github.io/documentacion-lcchub/

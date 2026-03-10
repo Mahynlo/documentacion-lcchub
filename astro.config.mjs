@@ -4,6 +4,8 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://mahynlo.github.io',
+	base: '/documentacion-lcchub',
 	integrations: [
 		starlight({
 			title: 'LCC-HUB Docs',
