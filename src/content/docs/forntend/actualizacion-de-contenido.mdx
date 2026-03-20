@@ -1,22 +1,37 @@
 ---
-title: Actualización de contenido de la apalicacion
-description: Explicar cómo mantener, actualizar y operar la aplicación de forma segura y eficiente.
+title: Actualización de Contenido de la Aplicación
+description: Guía para mantener, actualizar y operar el contenido de la aplicación de forma segura y eficiente.
 ---
 
-Podrás actualizar el contenido de la aplicación para la sección de eventos, SoyLCC, y bolsa de proyectos. Para actualizar la información de los alumnos, mapa curricular, y otros datos de la base de datos, se recomienda contactar a la responsable del proyecto Edelmira Rodriguez, ya que es un proyecto aparte a este.
+Desde este panel podrás actualizar el contenido de la aplicación correspondiente a las secciones de **Eventos**, **SoyLCC**, **Anuncios y noticias** y **Galeria**. 
 
-## Requisitos
-Estar fisicamente en la Universidad de Sonora y conectarte a la red a través de un cable de red.
-Credenciales para acceder a través de SSH al servidor de producción de la aplicación.
+Para actualizar la información de los alumnos, el mapa curricular y otros datos específicos, es necesario contactar a la responsable del proyecto, **Edelmira Rodriguez**, ya que esta información se gestiona en un sistema independiente.
+
+## Requisitos Previos
+
+* Estar físicamente en las instalaciones de la **Universidad de Sonora** y conectarte a la red institucional mediante un cable Ethernet.
+* Contar con las credenciales de acceso SSH al servidor de producción.
+* Tener acceso de administrador (usuario y contraseña) a la interfaz de **Strapi**.
+
+### Conexión al Servidor
+Para conectarte al servidor de producción y verificar el acceso, utiliza el siguiente comando (la bandera `-vvv` te mostrará un registro detallado de la conexión):
+
 ```bash
-ssh usuario-xxxx@ip-xxxx -vvv # Para un log detallado
-Ingrese la contraseña: xxxx
+ssh usuario-xxxx@ip-xxxx -vvv 
+# El sistema te solicitará ingresar la contraseña: xxxx
 ```
 
-Acceso de administrador a la interfaz de Strapi (usuario y contraseña).
-La actualización de contenido se realiza a través de la interfaz de administrador de Strapi. Para ello hacemos un jump a la dirección IP del servidor de producción para hacerle “creer” a nuestra computadora que tenemos acceso a una aplicación en la red local.
+### Acceso al Panel de Administración (Strapi)
+La actualización de contenido se realiza a través de la interfaz de administrador de Strapi. Dado que el panel no está expuesto públicamente por seguridad, es necesario crear un túnel SSH (*Port Forwarding*) hacia la dirección IP del servidor. Esto permite que tu computadora acceda a la aplicación del servidor como si estuviera en tu red local.
+
+Ejecuta el siguiente comando para establecer el túnel:
 
 ```bash
 ssh -L 1337:localhost:1337 usuario-xxxx@ip-xxxx
 ```
-Una vez que hayamos hecho el jump, abrimos un navegador y vamos a la dirección http://localhost:1337/admin para acceder a la interfaz de administrador de Strapi. Aquí podremos actualizar el contenido de la aplicación, restrucutrar la base de datos, y abrir REST API endpoints. Para más información sobre cómo utilizar Strapi, revisa la documentación oficial.
+
+Una vez establecido el túnel de forma exitosa, abre tu navegador web e ingresa a [http://localhost:1337/admin](http://localhost:1337/admin) para iniciar sesión en Strapi. Desde ahí podrás actualizar el contenido de la aplicación, reestructurar la base de datos y gestionar los *endpoints* de la API REST. 
+
+:::tip[Documentación]
+Para obtener más detalles sobre cómo utilizar y sacar el máximo provecho de este CMS, te recomendamos revisar la documentación oficial de Strapi.
+:::

@@ -1,46 +1,50 @@
 ---
-title: Cambios en el codigo 
-description: Explicar cómo realizar cambios de codigo, actualizar y operar estos cambios en el frontend.
+title: Cambios en el Código
+description: Guía para realizar, actualizar y gestionar cambios en el código del frontend.
 ---
 
+Para mantener un control de versiones adecuado, te recomendamos seguir las pautas de contribución del repositorio. Es necesario utilizar Git, crear un *fork* del repositorio principal y trabajar desde tu propia copia.
 
-Y siga los pasos de readme del reposistorio que aqui tambien se describen a continuacion 
-Para mantener un control de versiones adecuado, se recomienda utilizar Git y crear un fork del repositorio, trabajando desde este fork.
-Todas las modificaciones futuras deben realizarse mediante un pull request desde el fork, el cual deberá ser aprobado por el equipo de CC-unison.
-Los cambios realizados en el repositorio se deben actualizar en el servidor utilizando el comando:
+Todas las modificaciones que desees proponer deben integrarse mediante un *Pull Request* (PR) desde tu *fork*, el cual deberá ser revisado y aprobado por el equipo de **CC-unison**.
+
+Para mantener tu entorno local sincronizado con los últimos cambios del repositorio principal, actualiza tu rama regularmente utilizando el comando:
+
 ```bash
 git pull
 ```
 
-## Convenciones de código: 
-- linting, formateo, nomenclatura, ramas de Git.
+## Convenciones de Código
+Para mantener la calidad y legibilidad del proyecto, asegúrate de seguir las reglas establecidas en cuanto a *linting*, formateo, nomenclatura y gestión de ramas de Git.
 
+### Convención de Commits Sugerida
 
-### Convencion de Commits sugeriada
-
-:::tip[Recomendado]
-El estandar para un commit sugerido es **Conventional Commits**. 
+:::tip[Recomendación]
+Se sugiere adoptar el estándar **Conventional Commits** para mantener un historial de cambios claro, estructurado y fácil de rastrear.
 :::
-Ejemplo:
-```bash
-feat: se agregaron nuevos tags y prioridad en el orden de anuncios
-```
-Se compoene de:
+
+**Estructura básica:**
 ```bash
 <tipo>[alcance opcional]: <descripción>
 ```
-Donde:feat → Tipo de cambio: indica que agregaste una nueva funcionalidad (feature).
-se agregaron nuevos tags y prioridad en el orden de anuncios → Mensaje descriptivo, explica qué hiciste.
 
-Otros ejemplos de commits
+**Ejemplo de uso:**
+```bash
+feat: se agregaron nuevos tags y prioridad en el orden de anuncios
+```
 
-| Tipo         | Significado                                                  |
-| ------------ | ------------------------------------------------------------ |
-| **feat**     | Nueva funcionalidad                                          |
-| **fix**      | Corrección de un error (*bug fix*)                           |
-| **docs**     | Cambios en documentación                                     |
-| **style**    | Cambios que no afectan el código (formato, espacios, estilo) |
-| **refactor** | Refactorización de código, sin cambiar funcionalidad         |
-| **perf**     | Mejora de rendimiento                                        |
-| **test**     | Agregar o modificar tests                                    |
-| **chore**    | Tareas de mantenimiento, configuraciones, scripts            |
+En este ejemplo, el commit se compone de:
+* **`feat`** → Tipo de cambio: indica que se agregó una nueva funcionalidad (*feature*).
+* **`se agregaron nuevos...`** → Mensaje descriptivo: explica de forma concisa qué cambios se realizaron.
+
+**Otros tipos de commits comunes:**
+
+| Tipo | Significado |
+| :--- | :--- |
+| **feat** | Nueva funcionalidad. |
+| **fix** | Corrección de un error (*bug fix*). |
+| **docs** | Cambios o adiciones en la documentación. |
+| **style** | Cambios que no afectan la lógica del código (formato, espacios, punto y coma, etc.). |
+| **refactor** | Refactorización de código, sin cambiar su funcionalidad ni corregir errores. |
+| **perf** | Modificaciones en el código que mejoran el rendimiento. |
+| **test** | Creación o modificación de pruebas (*tests*). |
+| **chore** | Tareas de mantenimiento, actualización de dependencias, configuraciones o scripts. |

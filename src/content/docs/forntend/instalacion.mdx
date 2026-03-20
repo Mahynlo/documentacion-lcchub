@@ -3,47 +3,48 @@ title: Instalación del Frontend
 description: Guía paso a paso para configurar el entorno de desarrollo local de LCC-HUB.
 ---
 
-### Frontend instalacion en local
-El proyecto de frontend está alojado en el repositorio CC-unison de GitHub.
-Para instalarlo en su coputador corra el comando:
+### Instalación Local del Frontend
+El proyecto del frontend está alojado en el repositorio **CC-unison** de GitHub. Para comenzar, clona el repositorio en tu equipo ejecutando el siguiente comando:
+
 ```bash
-git clone https://github.com/CC-unison/lcchub-dev.git
+git clone [https://github.com/CC-unison/lcchub-dev.git](https://github.com/CC-unison/lcchub-dev.git)
 ```
 
-una ves instalado dirigase a la carpeta con:
+Una vez descargado, accede a la carpeta del proyecto:
+
 ```bash
 cd lcchub-dev
 ```
 
-
 ### Requisitos Previos
-Antes de proceder con la instalación de paquetes, asegúrate de cumplir con las versiones de software compatibles para evitar errores de compilación o conflictos entre dependencias:
+Antes de instalar las dependencias, asegúrate de cumplir con las versiones de software compatibles para evitar errores de compilación o conflictos:
 
-Node.js: Se recomienda la versión v22.1.0 (o versiones LTS superiores).
-
-NPM: Una versión actualizada (generalmente se instala automáticamente junto con Node.js).
-
+* **Node.js:** Se recomienda la versión **v22.1.0** (o versiones LTS superiores).
+* **NPM:** Una versión actualizada (generalmente se instala de forma automática junto con Node.js).
 
 :::note
-Es necesario que cuante con una versión de node para esto se recomienda la `node v22.1.0` tengalo en cuanta
-para la instalacion de paquetes tambien una version actualizada de npm.Si utilizas un gestor de versiones como nvm, puedes cambiar rápidamente a la versión necesaria con el comando nvm use 22.
+Si utilizas un gestor de versiones como **nvm**, puedes cambiar rápidamente a la versión necesaria de Node ejecutando el comando `nvm use 22`.
 :::
 
-Ejecuta el siguiente comando para instalar todas las bibliotecas y módulos necesarios definidos en el archivo package.json:
+Una vez verificados los requisitos, ejecuta el siguiente comando para instalar todas las bibliotecas y módulos necesarios definidos en el archivo `package.json`:
+
 ```bash
 npm install
 ```
-### Archivo de Variables de Entorno (.env)
-El proyecto requiere de ciertas credenciales para conectarse a los servicios de Azure (para la autenticación) y Firebase (para la base de datos de alumnos).
 
-Debes crear un archivo llamado **.env** o **.env.local** en la raíz del proyecto y copiar el siguiente esquema, reemplazando las x con las credenciales reales:
+### Configuración de Variables de Entorno (.env)
+El proyecto requiere de ciertas credenciales para conectarse a los servicios de **Azure** (para la autenticación) y **Firebase** (para la base de datos de los alumnos).
+
+Debes crear un archivo llamado `.env` o `.env.local` en la raíz del proyecto y copiar la siguiente plantilla, reemplazando las `x` con las credenciales reales:
+
 :::caution
-Seguridad: Nunca subas el archivo .env al repositorio de GitHub. Este archivo contiene credenciales sensibles y debe estar incluido en tu archivo .gitignore.
+**Nunca subas el archivo .env al repositorio de GitHub.** Este archivo contiene credenciales sensibles y debe estar incluido en tu archivo `.gitignore` para evitar filtraciones de seguridad.
 :::
-```.env
+
+```env
 NEXT_PUBLIC_AZURE_CLIENT_ID=xxxx-xx-x
-NEXT_PUBLIC_AZURE_AUTHORITY=https://login.microsoftonline.com/xxxx-xx-x
-NEXT_PUBLIC_AZURE_REDIRECT_URI=http://localhost:62213/ or https://your-web-domain/dashboard/auth
+NEXT_PUBLIC_AZURE_AUTHORITY=[https://login.microsoftonline.com/xxxx-xx-x](https://login.microsoftonline.com/xxxx-xx-x)
+NEXT_PUBLIC_AZURE_REDIRECT_URI=http://localhost:62213/ o https://your-web-domain/dashboard/auth
 NEXT_PUBLIC_FIREBASE_API_KEY=xxxx-xx-x
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=xxxx-xx-x
 NEXT_PUBLIC_FIREBASE_DATABASE_URL=xxxx-xx-x
@@ -55,10 +56,10 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=xxxx-xx-x
 ```
 
 ### Ejecución del Proyecto
-Una vez configuradas las variables y las dependencias, inicia el servidor de desarrollo local:
+Una vez configuradas las variables de entorno y las dependencias, inicia el servidor de desarrollo local:
 
 ```bash
 npm run dev
 ```
 
-La aplicación estará disponible para previsualización en: http://localhost:3000.
+La aplicación estará disponible para su previsualización en tu navegador a través de: [http://localhost:62213](http://localhost:62213).
