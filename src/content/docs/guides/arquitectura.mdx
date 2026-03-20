@@ -1,29 +1,24 @@
 ---
-title: Arquitectura de la aplicación
-description: Explicar cómo mantener, actualizar y operar la aplicación de forma segura y eficiente.
+title: Arquitectura de la Aplicación
+description: Descripción general de la infraestructura, el flujo de datos y los componentes principales del proyecto.
 ---
 
 ## Diagrama
 ![Diagrama de arquitectura](../../../assets/images/arquitectura.png)
 
+El flujo de comunicación de la aplicación sigue esta secuencia:
 
-Cuando un usuario realiza un GET request a la dirección https://lcc-hub.unison.mx, el DNS target gestionado por el área de informática redirige la solicitud a la IP de un servidor dentro de la red Unison.
+1. **Petición Inicial:** Cuando un usuario realiza una solicitud HTTP GET a `https://lcc-hub.unison.mx`, el registro DNS (gestionado por el área de Informática) redirige el tráfico hacia la dirección IP de un servidor alojado dentro de la red de la Unison.
+2. **Proxy Inverso:** En dicho servidor, un servicio de Nginx recibe la petición y se encarga de gestionar y enrutar el tráfico hacia el servidor de Next.js, donde se ejecuta el frontend de la aplicación.
+3. **Gestión de Contenido (CMS):** El frontend consume los *endpoints* expuestos por una API REST en un servidor Strapi. Este servidor actúa como Gestor de Contenidos (CMS) y almacena su información en una base de datos SQLite.
+4. **Integración con Sistemas Legacy:** Adicionalmente, la aplicación realiza peticiones a un servidor *legacy* (heredado de un proyecto anterior) para consultar los datos de alumnos y materias, los cuales se encuentran almacenados en Firebase.
+5. **Autenticación:** El control de acceso y la identidad de los usuarios se gestionan mediante una Single Page Application (SPA) integrada con Azure Active Directory (Azure AD), utilizando un token de acceso proporcionado por el área de Informática.
 
-En dicho servidor, se ejecuta un servidor Nginx, que se encarga de gestionar y dirigir el tráfico hacia la aplicación. Nginx redirige las solicitudes al servidor de Next.js, donde corre el frontend de la aplicación.
+## Descripción de Componentes Principales
 
-El frontend realiza requests hacia un servidor Strapi, que funciona como CMS, expone los endpoints de la API y almacena los datos en una base de datos SQLite.
-
-Adicionalmente, la aplicación realiza requests a un servidor legacy de un proyecto anterior, que contiene datos de alumnos y materias almacenados en Firebase.
-
-Por último, la autenticación de la aplicación se gestiona mediante una SPA de Azure AD, a la cual se accede a través de un token proporcionado por el área de informática.
-
-## Descripción de componentes principales
-
-- **Frontend**: Next.js / React / Tailwind CSS / TypeScript  
-- **Backend**: Node.js con Strapi CMS  
-- **Autenticación**: Azure Active Directory (AD)  
-- **Base de datos**: Firebase y SQLite  
-- **Servicios externos**: Azure (autenticación) y Strapi  
-
----
+- **Frontend:** Next.js / React / Tailwind CSS / TypeScript
+- **Backend (CMS):** Node.js con Strapi
+- **Servidor Web / Proxy:** Nginx
+- **Autenticación:** Azure Active Directory (Azure AD)
+- **Bases de Datos:** SQLite (para el CMS de Strapi) y Firebase (para datos legacy de alumnos y materias)
 

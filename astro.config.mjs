@@ -9,6 +9,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'LCC-HUB Docs',
+			customCss: ['./src/styles/lcchub-theme.css'],
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/CC-unison/lcchub-dev' }],
 			sidebar: [
 				{

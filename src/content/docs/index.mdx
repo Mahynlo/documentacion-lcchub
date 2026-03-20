@@ -1,36 +1,36 @@
 ---
 title: Guía de mantenimiento de la aplicación LCC Hub
-description: Get started building your docs site with Starlight.
+description: Centro de documentación técnica para mantenimiento y uso de LCC Hub.
 template: splash
 hero:
   tagline: Aquí encontrarás información sobre cómo mantener y actualizar la aplicación, así como las tareas necesarias para garantizar su correcto funcionamiento.
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/logo-lcc.png
   actions:
-    - text: Introduccion
+    - text: Ir a la guía
       link: /documentacion-lcchub/guides/introduccion/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: Guía de uso
+      link: /documentacion-lcchub/guia-de-uso/introduccion/
+      icon: open-book
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Accesos rápidos
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+  <Card title="Frontend" icon="pencil">
+    Guías para instalación, cambios y actualización de contenido del frontend.
+  </Card>
+  <Card title="Backend" icon="server">
+    Documentación de arquitectura, despliegue e instalación del backend.
+  </Card>
+  <Card title="Asistente virtual" icon="chat">
+    Material de referencia para mantenimiento y funcionamiento del asistente.
+  </Card>
+  <Card title="Programa extractor" icon="seti:csv">
+    Flujo, arquitectura y operación del módulo de extracción de datos.
+  </Card>
 </CardGrid>

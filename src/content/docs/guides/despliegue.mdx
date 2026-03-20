@@ -1,69 +1,80 @@
 ---
-title: Despliegue
-description: Explicar cómo mantener, actualizar y operar la aplicación de forma segura y eficiente.
+title: Despliegue en Producción
+description: Guía paso a paso para actualizar, compilar y desplegar la aplicación en el servidor de producción.
 ---
 
-El deploy se realiza accediendo al servidor de producción a través de SSH. Se ingresa al directorio el cual contiene dos repositorios, uno para el frontend y otro para el backend. Para actualizar la aplicación, se debe hacer un git pull en cada uno de los repositorios.
+El despliegue se realiza accediendo al servidor de producción a través de SSH. Dentro del servidor, encontrarás un directorio que contiene los repositorios correspondientes al frontend y al backend. Para desplegar una nueva versión, debes actualizar el código en sus respectivos directorios.
 
-#### 1. Primero trae los cambios:
-:::tip[Recomendado]
-Hacer un git pull para traer cambios.
-:::
+### 1. Obtener los Últimos Cambios
+Ingresa al directorio del repositorio que deseas actualizar (frontend o backend) y descarga los últimos cambios desde GitHub:
+
 ```bash
- git pull
+git pull
 ```
 
-#### 2. Verificar la versión actual de Node.js con el siguiente comando en caso de build para el backend:
+### 2. Verificar la Versión de Node.js
+Antes de compilar, asegúrate de estar utilizando la versión correcta de Node.js para el entorno que estás actualizando.
+
+:::caution[Importante]
+Aunque es especialmente crítico para el backend, siempre es una buena práctica verificar la versión de Node.js antes de ejecutar el comando de *build* en cualquiera de los dos repositorios.
+:::
+
+Puedes verificar y cambiar la versión de Node.js utilizando **nvm** (Node Version Manager):
+
 ```bash
-node --version
-# o
+# Verificar la versión actual en uso
 node -v
-```
-#### 3. Lista las versiones de node instaladas en el servidor:
-```bash
- nvm ls 
-```
-#### 4.Cambia de version de node en el servidor:
-```bash
- nvm use <numero de la version de node>
-```
-:::caution[Cuidado]
-Si solo se ara un build al frontend no son necesarios los comandos 2,3 y 4 pero simpre revisa la version de node necesaria.
 
-:::
-#### 5. Para hacerle build al frontend y al backend, se debe correr el siguiente comando:
+# Listar todas las versiones instaladas en el servidor
+nvm ls
+
+# Cambiar a la versión requerida (reemplaza con el número de versión exacto)
+nvm use <numero-de-version>
+```
+
+### 3. Compilar la Aplicación
+Una vez actualizado el código y verificada la versión de Node.js, ejecuta el siguiente comando para generar los archivos optimizados (deberás hacerlo dentro del directorio de cada repositorio que hayas actualizado):
+
 ```bash
 npm run build
 ```
 
-## Modo Produccion
+---
 
-Para correr la aplicación en modo producción se utiliza pm2 para que la aplicación siga corriendo en el servidor aunque se cierre la terminal.
+## Modo Producción (PM2)
+Para ejecutar la aplicación de forma continua en segundo plano y asegurar que el proceso no se detenga al cerrar la terminal, utilizamos el gestor de procesos **PM2**.
 
-Corre desde el directorio raíz de cada repositorio:
+Asegúrate de ejecutar los siguientes comandos desde el directorio raíz del repositorio correspondiente:
 
-Backend:
+**Backend (Iniciar primero):**
 ```bash
-pm2 start npm --name "lcchub-backend" -- start # Primero el backend
-pm2 logs # Para monitorear que todo esté funcionando correctamente
+pm2 start npm --name "lcchub-backend" -- start
+pm2 logs lcchub-backend # Para monitorear que el servicio inicie sin errores
 ```
-Frontend:
+
+**Frontend:**
 ```bash
-pm2 start npm --name "lcchub-frontend" -- start # Luego el frontend
-pm2 logs # Para monitorear que todo esté funcionando correctamente
+pm2 start npm --name "lcchub-frontend" -- start
+pm2 logs lcchub-frontend # Para monitorear que el servicio inicie sin errores
 ```
-## Reinicio automatico en caso de fallo
-Para asegurar que la aplicación se reinicie automáticamente en caso de fallo, se debe correr el siguiente comando:
+
+### Reinicio Automático
+Para garantizar que PM2 reinicie las aplicaciones automáticamente en caso de que el servidor se apague o falle, ejecuta los siguientes comandos una vez que tus procesos estén corriendo:
+
 ```bash
 pm2 startup
 pm2 save
 ```
-## Detener la aplicacion
-Para detener la aplicación, se debe correr el siguiente comando:
+
+### Detener la Aplicación
+Si necesitas detener los servicios por mantenimiento o para liberar recursos, puedes gestionarlos con estos comandos:
+
 ```bash
-pm2 ls # Para ver los procesos corriendo
+pm2 ls # Muestra una tabla con todos los procesos en ejecución y su estado
 pm2 stop lcchub-backend
 pm2 stop lcchub-frontend
 ```
 
-Para más información sobre cómo utilizar pm2, revisa la documentación oficial.
+:::tip[Documentación]
+Para configuraciones avanzadas o comandos adicionales, te recomendamos revisar la documentación oficial de PM2.
+:::
