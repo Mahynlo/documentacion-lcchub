@@ -1,0 +1,118 @@
+---
+title: Mantenimiento del Chatbot
+description: Guía técnica detallada sobre el uso de la API, operación manual, mantenimiento y migración del Chatbot.
+---
+
+El bot se ejecuta en el servidor **Pitaya** a través del puerto predeterminado **5110**. A continuación, se detallan las funciones de la API disponibles y los procedimientos de operación y mantenimiento.
+
+---
+
+## Endpoints de la API
+
+### 1. Eliminar Documentos (`/api/delete_source`)
+- **Método:** `GET`
+- **Descripción:** Elimina todos los archivos procesados almacenados en la carpeta `SOURCE_DOCUMENTS`.
+- **Ubicación en el servidor:** `/localGPT-main/SOURCE_DOCUMENTS`
+
+**Ejemplo (cURL):**
+```bash
+curl -X GET "http://<IP_SERVIDOR>:5110/api/delete_source"
+```
+
+### 2. Subir Documentos (`/api/save_document`)
+- **Métodos:** `GET`, `POST`
+- **Descripción:** Sube documentos PDF a la carpeta `SOURCE_DOCUMENTS`.
+- **Headers:** `Content-Type: multipart/form-data` *(Nota: Postman establece esta cabecera de forma automática al seleccionar `form-data`)*.
+
+**Ejemplo desde Postman:**
+1. Ve a la pestaña **Body** y selecciona la opción **form-data**.
+2. Agrega una nueva *key* con el nombre `files`.
+3. En la columna **Type**, cambia el valor de *Text* a **File**.
+4. En la columna **Value**, haz clic en **Select Files** y elige el archivo PDF que deseas subir.
+
+**Ejemplo (cURL):**
+```bash
+curl -X POST "http://<IP_SERVIDOR>:5110/api/save_document" \
+     -F "files=@/ruta/completa/al/archivo.pdf;type=application/pdf"
+```
+
+:::tip[Alternativa Local (SCP)]
+Si prefieres subir los archivos manualmente al servidor sin usar la API, puedes transferirlos vía SCP:
+```bash
+scp /ruta/al/archivo_local usuario@<IP_SERVIDOR>:/ruta/de/destino/SOURCE_DOCUMENTS
+```
+:::
+
+### 3. Procesar Documentos (`/api/run_ingest`)
+- **Método:** `GET`
+- **Descripción:** Ejecuta el proceso de ingesta (*ingest*), lo que obliga al bot a leer, procesar y alimentar su base de conocimiento con los documentos actuales de la carpeta `SOURCE_DOCUMENTS`.
+
+**Ejemplo (cURL):**
+```bash
+curl -X GET "http://<IP_SERVIDOR>:5110/api/run_ingest"
+```
+
+---
+
+## Operación y Mantenimiento Manual
+
+### Ejecutar el Bot Manualmente
+Si necesitas operar el bot directamente desde la terminal del servidor (por ejemplo, para reiniciar el servicio o depurar errores), sigue estos pasos:
+
+**1. Detener el proceso actual:**
+Identifica el proceso de Python que está ejecutando el bot:
+```bash
+ps aux | grep python
+```
+*Salida esperada (ejemplo):*
+```bash
+lcchv    |1017102|  0.0  0.2 33749012 2692240 ?    Sl   ene31   6:27 python /home/lcchv/Chatbot/localGPT-main/localGPT-main/run_localGPT_API.py --host 0.0.0.0 --port 5110
+```
+Mata el proceso utilizando su PID (en este ejemplo, `1017102`):
+```bash
+kill 1017102
+```
+
+**2. Ejecutar la ingesta manualmente:**
+```bash
+python ~/Chatbot/localGPT-main/localGPT-main/ingest.py
+```
+
+**3. Levantar el bot nuevamente:**
+Se recomienda utilizar `nohup` para que el proceso continúe ejecutándose en segundo plano tras cerrar la sesión SSH:
+```bash
+nohup python ~/Chatbot/localGPT-main/localGPT-main/run_localGPT_API.py --host 0.0.0.0 --port 5110 &
+```
+
+### Reinicio Automático del Servidor (Crontab)
+Para asegurar que el bot arranque automáticamente en caso de un reinicio inesperado del servidor, debes configurar una tarea programada:
+
+1. Abre el editor de *crontab*:
+   ```bash
+   crontab -e
+   ```
+2. Añade la siguiente línea al final del archivo para activar el entorno Conda e iniciar la API:
+   ```bash
+   @reboot /bin/bash -c "source ~/miniconda3/etc/profile.d/conda.sh && conda activate localGPT && nohup python ~/Chatbot/localGPT-main/localGPT-main/run_localGPT_API.py --host 0.0.0.0 --port 5110 &"
+   ```
+
+---
+
+## Arquitectura y Migración
+
+### Funcionamiento General
+- **Servidor:** Alojado en un entorno con suficiente capacidad de cómputo (actualmente en el servidor **Pitaya**).
+- **Puerto:** Expone sus servicios mediante el puerto `5110`.
+- **Comunicación Interna:** El backend principal de `lcc-hub` se comunica con el bot a través del puerto `5110`. Es estrictamente necesario que exista conectividad de red entre ambos servidores.
+- **Flujo de Ejecución:** El cliente (frontend) realiza peticiones al backend, y este, a su vez, consulta al chatbot. Esto garantiza que la carga de procesamiento (lectura e inferencia de los LLMs) ocurra exclusivamente en el servidor del bot y no en el navegador del usuario.
+
+### Migración a Otro Servidor
+Si es necesario mover el bot a una nueva infraestructura:
+
+1. Realiza los pasos de configuración de entorno y replicación del código descritos en el archivo de instalación (ej. `bot.md`).
+2. Accede por SSH al servidor que aloja la aplicación principal `lcc-hub`.
+3. Navega al directorio del servicio del chatbot en el backend:
+   ```bash
+   cd /home/lcc-administrator/cms-lcc-hub/backend/src/api/chatbot/services
+   ```
+4. Edita el archivo `chatbot.js` y actualiza la variable de conexión, reemplazando la dirección IP del servidor antiguo por la del nuevo servidor.

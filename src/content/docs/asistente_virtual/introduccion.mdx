@@ -1,8 +1,31 @@
 ---
-title: Introducción
-description: Introducción al asistente virtual.
+title: Introducción y Arquitectura del Chatbot
+description: Conceptos clave, tecnologías utilizadas y arquitectura de funcionamiento del Chatbot de LCC-HUB.
 ---
 
-## Introducción al Asistente Virtual
+## Descripción General
+El proyecto utiliza **LocalGPT** para procesar y responder consultas sobre documentos específicos de manera eficiente, utilizando un modelo de lenguaje (LLM) que se ejecuta de forma local. Esto garantiza la privacidad de los datos y permite un control total sobre el procesamiento de la información.
 
-El asistente virtual de LCC Hub tiene como objetivo brindar apoyo a los estudiantes de la LCC, resolviendo dudas y ofreciendo orientación sobre diversos aspectos relacionados con el desarrollo de sus materias a lo largo de su trayectoria académica.
+Actualmente, el bot se encuentra alojado en el servidor **Pitaya** y expone sus servicios a través del puerto **5110**.
+
+## Tecnologías Utilizadas
+* **Lenguaje:** Python 3.8+ (Recomendado 3.9).
+* **Gestor de Entornos:** Conda (Miniconda/Anaconda).
+* **Procesamiento y Modelos:** PyTorch, Torchvision, Transformers de HuggingFace.
+* **Aceleración por Hardware:** NVIDIA CUDA (para procesamiento en GPU).
+* **Servidor Web:** API local ejecutada mediante scripts de Python.
+
+## Conocimientos Previos Necesarios
+Para operar, mantener o modificar este bot, el desarrollador debe estar familiarizado con:
+* Administración básica de servidores Linux (conexiones SSH, comandos como `ps`, `kill`, `nohup`, `scp`).
+* Uso y gestión de entornos virtuales con Conda.
+* Conceptos básicos de Modelos de Lenguaje (LLMs), *embeddings* e ingesta de documentos.
+* Consumo de APIs REST (usando herramientas como cURL o Postman).
+
+## Arquitectura y Flujo de Funcionamiento
+El bot no interactúa directamente con el usuario final, sino que funciona como un microservicio interno para la plataforma LCC-HUB. El flujo es el siguiente:
+
+1. **Frontend:** El usuario realiza una pregunta desde la interfaz de usuario.
+2. **Backend (LCC-HUB):** El backend recibe la petición y se comunica internamente con el servidor del Chatbot a través del puerto `5110`.
+3. **Chatbot (Servidor Pitaya):** El bot recibe la consulta, busca en su base de conocimiento (documentos ingeridos) y devuelve la respuesta al backend.
+4. Toda la carga pesada (cómputo y lectura de documentos) ocurre exclusivamente en el servidor del bot, no en el cliente ni en el backend principal.

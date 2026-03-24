@@ -41,6 +41,8 @@ export default defineConfig({
 							label: 'Asistente Virtual',
 							items: [
 								{ label: 'Introducción', slug: 'asistente_virtual/introduccion' },
+								{ label: 'Instalacion del Chatbot', slug: 'asistente_virtual/instalacion' },
+								{ label: 'Mantenimiento del Chatbot', slug: 'asistente_virtual/mantenimiento' },
 							],
 						},
 						{

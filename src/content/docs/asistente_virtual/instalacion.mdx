@@ -1,0 +1,121 @@
+
+---
+title: Instalación del Chatbot
+description: Guía paso a paso para instalar y configurar el Chatbot de LCC-HUB.
+---
+## Instalación
+
+### 1. Transferir el Proyecto al Servidor
+Copia la carpeta del proyecto desde tu equipo local hacia el servidor (en este caso, `pitaya`) utilizando SCP:
+
+```bash
+scp -r localGPT-main usuario@pitaya:~/Chatbot/localGPT-main/
+```
+
+### 2. Configurar el Entorno Virtual
+Crea y activa un nuevo entorno virtual utilizando Conda con Python 3.9:
+
+```bash
+conda create --name localGPT python=3.9 -y
+conda activate localGPT
+```
+
+### 3. Instalar Dependencias Generales
+Navega a la carpeta del proyecto e instala los requerimientos básicos:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Verificar Instalación de PyTorch
+Comprueba las versiones de `torch` y `torchvision` que se acaban de instalar:
+
+```bash
+pip show torch torchvision
+```
+
+### 5. Configurar Soporte para GPU (Opcional pero recomendado)
+Si tu servidor cuenta con una GPU, instala las versiones compatibles con CUDA para aprovechar la aceleración por hardware. 
+
+Verifica tu versión de CUDA (por ejemplo, 11.8) y ejecuta:
+```bash
+pip install torch torchvision --index-url [https://download.pytorch.org/whl/cu118](https://download.pytorch.org/whl/cu118)
+```
+
+:::note[Optimización]
+Si necesitas reinstalar `bitsandbytes` para optimizar el uso de memoria de la GPU, ejecuta: `pip install bitsandbytes`
+:::
+
+---
+
+## Configuración Adicional (Hacks de Librerías)
+
+Debido a cambios en las dependencias de HuggingFace, es necesario aplicar un par de ajustes manuales en los archivos internos del entorno virtual.
+
+:::tip[Rutas de archivos]
+Las rutas a continuación asumen un entorno Linux con Miniconda/Anaconda. Si tu instalación base está en otra carpeta, reemplaza `~/.conda/envs/` por la ruta correspondiente (ej. `~/miniconda3/envs/`).
+:::
+
+### 1. Modificar `SentenceTransformer.py`
+* **Ubicación:** `~/.conda/envs/localGPT/lib/python3.9/site-packages/sentence_transformers/SentenceTransformer.py`
+* **Acción:** Abre el archivo y reemplaza la función `cached_download` por `hf_hub_download`.
+
+### 2. Modificar `util.py`
+* **Ubicación:** `~/.conda/envs/localGPT/lib/python3.9/site-packages/sentence_transformers/util.py`
+* **Acciones:**
+  1. Reemplaza `cached_download` por `hf_hub_download` en todo el archivo.
+  2. Reemplaza `cached_download_args` por `hf_hub_download_args`.
+  3. Sustituye la declaración de `hf_hub_download_args` por el siguiente diccionario:
+     ```python
+     hf_hub_download_args = {
+         'repo_id': repo_id,
+         'filename': model_file.rfilename,
+         'revision': model_info.sha,
+         'cache_dir': storage_folder,
+         'force_filename': relative_filepath,
+         'library_name': library_name,
+         'library_version': library_version,
+         'user_agent': user_agent,
+         'use_auth_token': use_auth_token
+     }
+     ```
+  4. Comenta o elimina el siguiente bloque de código condicional:
+     ```python
+     # if version.parse(huggingface_hub.__version__) >= version.parse("0.8.1"):
+     #     hf_hub_download_args['legacy_cache_layout'] = True
+     ```
+
+### 3. Corregir Caché del Modelo de Embeddings
+Si al ejecutar el bot recibes un error indicando que falta el archivo `model_type`, sigue estos pasos:
+* **Ubicación de caché:** `~/.cache/torch/sentence_transformers/<Nombre_del_modelo>`
+* Revisa si los archivos están ocultos dentro de una subcarpeta como: `.../snapshots/<id_del_modelo>/`
+* Copia o mueve todos los archivos de esa subcarpeta directamente a la carpeta raíz del modelo (`~/.cache/torch/sentence_transformers/<Nombre_del_modelo>`).
+
+---
+
+## Ingesta de Datos
+
+Una vez configurado todo, ejecuta el script de ingesta para que el modelo procese y cargue los documentos locales:
+
+```bash
+python ingest.py
+```
+
+---
+
+## Ejecución de la API
+
+Inicia el servidor local de la API para comenzar a interactuar con el bot:
+
+```bash
+python run_localGPT_API.py
+```
+Una vez que el servicio esté corriendo (generalmente en el puerto 5110), podrás comunicarte con el modelo mediante peticiones HTTP.
+
+---
+
+## Solución de Problemas Frecuentes
+
+* **Error relacionado con CUDA:** Asegúrate de que las versiones de `torch` y `torchvision` que instalaste coincidan exactamente con la versión de CUDA instalada en tu sistema.
+* **Archivos faltantes del modelo:** Revisa el paso 3 de la sección "Configuración Adicional" para mover los archivos de caché a la ruta correcta.
+* **Errores de importación o dependencias:** Fuerce la reinstalación de los paquetes base ejecutando nuevamente `pip install -r requirements.txt`.
