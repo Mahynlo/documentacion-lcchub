@@ -1,6 +1,79 @@
 ---
-title: Instalacion del backend
-description: Explicar cómo Instalar, actualizar y operar el backend.
+title: Instalación del Backend
+description: Guía paso a paso para instalar, configurar y ejecutar el entorno local del backend de LCC-HUB.
 ---
 
-El backend en si es el strapi que es un cms 
+### Instalación Local
+El proyecto del backend está alojado en el repositorio **CC-unison** de GitHub. Para comenzar, clona el repositorio en tu equipo ejecutando el siguiente comando:
+
+```bash
+git clone [https://github.com/CC-unison/lcchub-backend-dev.git](https://github.com/CC-unison/lcchub-backend-dev.git)
+```
+
+Una vez clonado el repositorio, accede a la carpeta del proyecto:
+
+```bash
+cd lcchub-backend-dev
+```
+
+### Requisitos Previos
+Antes de instalar las dependencias, asegúrate de cumplir con las versiones de software compatibles para evitar errores de compilación o conflictos:
+
+* **Node.js:** Se recomienda la versión **v20.13.1** (o versiones LTS superiores).
+* **NPM:** Una versión actualizada (generalmente se instala de forma automática junto con Node.js).
+
+:::note
+Si utilizas un gestor de versiones como **nvm**, puedes cambiar rápidamente a la versión necesaria de Node ejecutando el comando `nvm use 20.13.1`.
+:::
+
+Una vez verificados los requisitos, ejecuta el siguiente comando para instalar todas las bibliotecas y módulos necesarios definidos en el archivo `package.json`:
+
+```bash
+npm install
+```
+
+### Configuración de Variables de Entorno (.env)
+El proyecto requiere credenciales específicas para conectarse a servicios clave, como la **base de datos** y los **servicios de autenticación**.
+
+Debes crear un archivo llamado `.env` o `.env.local` en la raíz del proyecto y copiar la siguiente plantilla, reemplazando las `x` con los valores reales:
+
+:::caution[Seguridad]
+
+**Nunca subas el archivo .env al repositorio de GitHub.** Este archivo contiene credenciales sensibles y debe estar incluido en tu archivo `.gitignore` para evitar filtraciones de seguridad.
+:::
+
+```env
+HOST=xxx-xx
+PORT=1337
+APP_KEYS=xxx-xxx
+API_TOKEN_SALT=xxx-xxx
+ADMIN_JWT_SECRET=xxx-xxx
+TRANSFER_TOKEN_SALT=xxx-xxx
+
+# Database
+DATABASE_CLIENT=xxx-xx
+DATABASE_FILENAME=xxx-xxx
+JWT_SECRET=xxx-xxx
+```
+
+### Ejecución en Modo Desarrollo
+Una vez configuradas las variables de entorno y las dependencias, inicia el servidor de desarrollo local para poder hacer pruebas y modificaciones:
+
+```bash
+npm run develop
+```
+
+### Ejecución en Modo Producción
+Si necesitas simular o ejecutar el entorno de producción localmente, primero debes construir (compilar) la aplicación y luego iniciarla:
+
+```bash
+npm run build
+npm run start
+```
+
+La aplicación y el panel de administración estarán disponibles en tu navegador a través de: [http://localhost:1337](http://localhost:1337).
+
+:::note[Recordatorio]
+
+La información de la base de datos y los servicios de autenticación del CMS en tu entorno local puede no ser la misma que la del servidor de producción. Es normal que haya diferencias, ya que es más seguro y sencillo configurar la información real y las colecciones directamente en el servidor de producción.
+:::

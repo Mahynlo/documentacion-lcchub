@@ -18,3 +18,39 @@ Api Automatica al crear una cloeccion y sus atributos Strapi genera automaticame
 :::caution
 Strapi requiere permisos para poder mostrar el enponts asi que debera otorgar permisos ya sea de lectura o escritura dependiendo del caso de uso.  
 :::
+
+## Convenciones de Código
+Para mantener la calidad y legibilidad del proyecto, asegúrate de seguir las reglas establecidas en cuanto a *linting*, formateo, nomenclatura y gestión de ramas de Git.
+
+### Convención de Commits Sugerida
+
+:::tip[Recomendación]
+Se sugiere adoptar el estándar **Conventional Commits** para mantener un historial de cambios claro, estructurado y fácil de rastrear.
+:::
+
+**Estructura básica:**
+```bash
+<tipo>[alcance opcional]: <descripción>
+```
+
+**Ejemplo de uso:**
+```bash
+feat: se agregaron nuevos tags y prioridad en el orden de anuncios
+```
+
+En este ejemplo, el commit se compone de:
+* **`feat`** → Tipo de cambio: indica que se agregó una nueva funcionalidad (*feature*).
+* **`se agregaron nuevos...`** → Mensaje descriptivo: explica de forma concisa qué cambios se realizaron.
+
+**Otros tipos de commits comunes:**
+
+| Tipo | Significado |
+| :--- | :--- |
+| **feat** | Nueva funcionalidad. |
+| **fix** | Corrección de un error (*bug fix*). |
+| **docs** | Cambios o adiciones en la documentación. |
+| **style** | Cambios que no afectan la lógica del código (formato, espacios, punto y coma, etc.). |
+| **refactor** | Refactorización de código, sin cambiar su funcionalidad ni corregir errores. |
+| **perf** | Modificaciones en el código que mejoran el rendimiento. |
+| **test** | Creación o modificación de pruebas (*tests*). |
+| **chore** | Tareas de mantenimiento, actualización de dependencias, configuraciones o scripts. |
