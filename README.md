@@ -1,18 +1,16 @@
-# Starlight Starter Kit: Basics
+# Documentación de LCC-HUB (Construida con Starlight)
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
-```
-npm create astro@latest -- --template starlight
-```
+Este repositorio contiene el código fuente de la documentación oficial del proyecto LCC-HUB, construida utilizando **Astro** y **Starlight**.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+> 🧑‍🚀 **¿Eres nuevo en el proyecto?** Sigue las instrucciones a continuación para levantar el entorno local, realizar cambios y entender cómo se despliega el sitio.
 
-## 🚀 Project Structure
+## 🚀 Estructura del Proyecto
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+Dentro de este proyecto de Astro + Starlight, encontrarás la siguiente estructura de carpetas y archivos clave:
 
-```
+```text
 .
 ├── public/
 ├── src/
@@ -25,39 +23,39 @@ Inside of your Astro + Starlight project, you'll see the following folders and f
 └── tsconfig.json
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+* **`/src/content/docs/`**: Aquí es donde ocurre la magia. Starlight busca archivos `.md` o `.mdx` en este directorio. Cada archivo se convierte automáticamente en una página web basada en su nombre.
+* **`/src/assets/`**: Guarda aquí las imágenes del proyecto. Puedes incrustarlas en tus archivos Markdown utilizando enlaces relativos.
+* **`/public/`**: Directorio para recursos estáticos que no necesitan ser procesados, como el *favicon* (`favicon.svg`).
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+## 🧞 Comandos Útiles
 
-Static assets, like favicons, can be placed in the `public/` directory.
+Todos los comandos deben ejecutarse desde la raíz del proyecto utilizando tu terminal:
 
-## 🧞 Commands
+| Comando | Acción |
+| :--- | :--- |
+| `npm install` | Instala todas las dependencias necesarias del proyecto. |
+| `npm run dev` | Inicia el servidor de desarrollo local en `http://localhost:4321`. |
+| `npm run build` | Compila el sitio y lo prepara para producción en la carpeta `./dist/`. |
+| `npm run preview` | Previsualiza tu compilación localmente antes de desplegarla. |
+| `npm run astro ...` | Ejecuta comandos de la CLI de Astro (ej. `astro add`, `astro check`). |
+| `npm run astro -- --help` | Muestra el menú de ayuda de la CLI de Astro. |
 
-All commands are run from the root of the project, from a terminal:
+## 🌐 Despliegue en GitHub Pages (CI/CD)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Este repositorio ya incluye un flujo de trabajo de GitHub Actions ([`deploy.yml`](.github/workflows/deploy.yml)) configurado para compilar y publicar la documentación automáticamente en **GitHub Pages** cada vez que se realiza un *push* a la rama `main`.
 
-## 👀 Want to learn more?
+**Pasos necesarios para habilitarlo en GitHub (solo la primera vez):**
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+1. Ve a la pestaña **Settings** (Configuración) del repositorio en GitHub.
+2. En la barra lateral izquierda, selecciona **Pages**.
+3. En la sección *Build and deployment*, cambia la opción de *Source* a **GitHub Actions**.
+4. Realiza un *push* a la rama `main` para disparar el flujo de trabajo por primera vez.
 
-## Deploy en GitHub Pages con GitHub Actions
+**URL de despliegue esperada:**
+👉 [https://mahynlo.github.io/documentacion-lcchub/](https://mahynlo.github.io/documentacion-lcchub/)
 
-Este repositorio ya incluye el workflow [deploy.yml](.github/workflows/deploy.yml) para publicar automaticamente en GitHub Pages cuando hay push a main.
+## 📚 ¿Quieres aprender más?
 
-Pasos necesarios en GitHub:
-
-1. Ir a Settings > Pages.
-2. En Build and deployment seleccionar Source: GitHub Actions.
-3. Hacer push a main para disparar el workflow.
-
-URL esperada de despliegue:
-
-- https://mahynlo.github.io/documentacion-lcchub/
+Si necesitas realizar configuraciones avanzadas o personalizar la apariencia del sitio, te recomendamos revisar la documentación oficial de las herramientas que utilizamos:
+* [Documentación de Starlight](https://starlight.astro.build/es/)
+* [Documentación de Astro](https://docs.astro.build/es/)

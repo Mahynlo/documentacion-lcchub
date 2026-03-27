@@ -3,33 +3,32 @@ title: Actualizaciones y Mantenimiento
 description: Guía para realizar actualizaciones de paquetes del servidor y respaldos preventivos.
 ---
 
-A medida que el proyecto evoluciona y el sistema operativo recibe parches de seguridad, es necesario realizar actualizaciones en el servidor base (Ubuntu). Dado que el servidor aloja nuestras aplicaciones y bases de datos locales de Strapi, **es estrictamente necesario realizar respaldos previos** para prevenir la pérdida de datos y garantizar una rápida recuperación en caso de falla.
+A medida que el proyecto evoluciona y el sistema operativo recibe parches de seguridad, es necesario realizar actualizaciones periódicas en el servidor base (Ubuntu). Dado que este servidor aloja nuestras aplicaciones y bases de datos locales, **es estrictamente necesario realizar respaldos previos** para prevenir la pérdida de datos y garantizar una rápida recuperación en caso de fallos.
 
 ## 1. Procedimiento de Respaldo Previo (Backups)
 
-Antes de actualizar cualquier paquete importante del sistema o de la aplicación, debes asegurar la integridad de la información actual. 
+Antes de actualizar cualquier paquete crítico del sistema o de la aplicación, debes asegurar la integridad de la información actual.
 
 ### A) Respaldo de Variables de Entorno (.env)
-Los archivos `.env` contienen credenciales críticas. Guárdalos en un directorio seguro del servidor (fuera del directorio público de los repositorios) o descárgalos localmente a tu máquina por precaución, para no perder el acceso a la base de datos o APIs en caso de corromper el repositorio local.
+Los archivos `.env` contienen credenciales críticas. Guárdalos en un directorio seguro del servidor (fuera de la carpeta pública de los repositorios) o descárgalos a tu máquina local. Esto evitará la pérdida de acceso a la base de datos o APIs si el repositorio local se corrompe.
 ```bash
 cp /ruta/al/proyecto/.env /ruta/de/respaldos/env_backup_fecha
 ```
 
 ### B) Respaldo de la Base de Datos de Strapi
-Es de suma importancia respaldar la base de datos que utiliza el CMS de Strapi antes de actualizar algo. Si utilizas SQLite, realiza una copia directa del archivo de base de datos. Si usas PostgreSQL o MySQL, deberás realizar un dump.
+Es fundamental respaldar la base de datos que utiliza el CMS de Strapi antes de cualquier actualización. Como el proyecto utiliza SQLite, basta con realizar una copia directa del archivo `.db`.
 ```bash
-# Ejemplo si usas SQLite:
 cp /ruta/a/strapi/database/data.db /ruta/de/respaldos/strapi_db_backup.db
 ```
 
-### C) Respaldo de Fotos y Archivos Subidos (Uploads)
-En Strapi, todos los archivos multimedia cargados por los usuarios (como imágenes para eventos o anuncios) se guardan típicamente en la carpeta `public/uploads`. Realiza una copia comprimida de este directorio para no perder las fotos almacenadas.
+### C) Respaldo de Archivos Multimedia (Uploads)
+En Strapi, todos los archivos cargados por los usuarios (como imágenes para eventos o perfiles) se guardan en la carpeta `public/uploads`. Realiza una copia comprimida de este directorio para asegurar los archivos multimedia.
 ```bash
 tar -czvf /ruta/de/respaldos/uploads_backup.tar.gz /ruta/a/strapi/public/uploads
 ```
 
-### D) Subir Cambios a GitHub
-Asegúrate de que cualquier modificación o nueva función desarrollada localmente en el servidor haya sido guardada y subida (*pushed*) al repositorio en GitHub de manera segura antes de realizar actualizaciones globales.
+### D) Sincronización con GitHub
+Asegúrate de que cualquier modificación o nueva función desarrollada localmente en el servidor haya sido guardada y subida (*pushed*) al repositorio en GitHub de manera segura.
 ```bash
 git status
 git add .
@@ -41,20 +40,55 @@ git push origin main
 
 ## 2. Actualización de Paquetes del Servidor (Ubuntu)
 
-Una vez que la base de datos, los archivos multimedia (fotos), las claves del `.env` y el código fuente estén completamente asegurados en otro directorio o en la nube (GitHub), puedes proceder a actualizar libremente el entorno del servidor Linux.
+Una vez que la base de datos, los archivos multimedia, las variables de entorno y el código fuente estén asegurados, puedes proceder a actualizar el entorno del servidor Linux. 
 
-1. **Actualizar la lista de repositorios:**
-   ```bash
-   sudo apt update
-   ```
-2. **Aplicar actualizaciones disponibles a los paquetes instalados:**
-   ```bash
-   sudo apt upgrade -y
-   ```
-3. *(Opcional)* **Actualizar el sistema completo** (remueve dependencias obsoletas):
-   ```bash
-   sudo apt full-upgrade -y
-   sudo apt autoremove -y
-   ```
+:::tip[Frecuencia Recomendada]
+Para mantener la seguridad y estabilidad del servidor, se recomienda ejecutar estos comandos periódicamente, de preferencia de forma **semanal**.
+:::
 
-Una vez finalizado, puedes reiniciar los servicios de PM2 (o incluso reiniciar el servidor base si las actualizaciones del núcleo lo requieren) y verificar que las aplicaciones de frontend y backend se levanten correctamente con acceso a sus variables de entorno.
+### Comandos Fundamentales de Actualización
+
+**1. Ver paquetes con actualizaciones disponibles:**
+Antes de instalar nada, puedes revisar qué paquetes tienen una nueva versión disponible.
+```bash
+apt list --upgradable
+```
+
+**2. Sincronizar la lista de repositorios:**
+Este comando actualiza los índices para que el sistema sepa qué nuevas versiones existen.
+```bash
+sudo apt update
+```
+
+**3. Actualizar los paquetes instalados:**
+Descarga e instala las versiones más recientes de los paquetes que ya tienes en el sistema.
+```bash
+sudo apt upgrade
+```
+
+**4. Actualización rápida y completa (Recomendado):**
+Puedes combinar los dos comandos anteriores y aceptar la instalación automáticamente para agilizar el proceso.
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+**5. Actualizar un paquete específico:**
+Si solo necesitas actualizar una herramienta en particular sin tocar el resto del sistema, utiliza este comando.
+```bash
+sudo apt install --only-upgrade <nombre_paquete>
+```
+
+**6. Limpieza profunda (Opcional):**
+Para actualizar el sistema completo y remover las dependencias obsoletas que ya no se utilizan.
+```bash
+sudo apt full-upgrade -y
+sudo apt autoremove -y
+```
+
+### Consideraciones Posteriores a la Actualización
+
+* **Reinicio de Servicios:** Una vez finalizado el proceso, asegúrate de reiniciar los procesos de PM2 y verificar que tanto el frontend como el backend se ejecuten correctamente.
+* **Actualizaciones del Kernel:** Si el sistema instaló actualizaciones del núcleo (*kernel*) de Linux, será estrictamente necesario reiniciar el servidor por completo para aplicarlas ejecutando:
+  ```bash
+  sudo reboot
+  ```
