@@ -13,35 +13,35 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/CC-unison/lcchub-dev' }],
 			sidebar: [
 				{
-					label: 'Guia de Mantenimento',
+					label: 'Guía de Mantenimiento',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'Introduccion', slug: 'guides/introduccion' },
+						{ label: 'Introducción', slug: 'guides/introduccion' },
 						{ label: 'Código fuente', slug: 'guides/codigo-fuente' },
 						{ label: 'Arquitectura de la aplicación', slug: 'guides/arquitectura' },
 						{ label: 'Despliegue (Deployment)', slug: 'guides/despliegue' },
 						{
 							label: 'Frontend',
 							items: [
-								{ label: 'Introducción', slug: 'forntend/introduccion' },
-								{ label: 'Instalacion de Fontend', slug: 'forntend/instalacion' },
-								{ label: 'Contribuciones de codigo', slug: 'forntend/cambios' },
-								{ label: 'Actualización de contenido', slug: 'forntend/actualizacion-de-contenido' },
+								{ label: 'Introducción', slug: 'frontend/introduccion' },
+								{ label: 'Instalación de Frontend', slug: 'frontend/instalacion' },
+								{ label: 'Contribuciones de código', slug: 'frontend/cambios' },
+								{ label: 'Actualización de contenido', slug: 'frontend/actualizacion-de-contenido' },
 							],
 						},
 						{
 							label: 'Backend',
 							items: [
 								{ label: 'Introducción', slug: 'backend/introduccion' },
-								{ label: 'Instalacion de Backend', slug: 'backend/instalacion' },
-								{ label: 'Contribuciones de codigo', slug: 'backend/cambios' },
+								{ label: 'Instalación de Backend', slug: 'backend/instalacion' },
+								{ label: 'Contribuciones de código', slug: 'backend/cambios' },
 							],
 						},
 						{
 							label: 'Asistente Virtual',
 							items: [
 								{ label: 'Introducción', slug: 'asistente_virtual/introduccion' },
-								{ label: 'Instalacion del Chatbot', slug: 'asistente_virtual/instalacion' },
+								{ label: 'Instalación del Chatbot', slug: 'asistente_virtual/instalacion' },
 								{ label: 'Mantenimiento del Chatbot', slug: 'asistente_virtual/mantenimiento' },
 							],
 						},
@@ -49,15 +49,15 @@ export default defineConfig({
 							label: 'Programa extractor',
 							items: [
 								// Each item here is one entry in the navigation menu.
-								{ label: 'Introduccion', slug: 'progama_extractor/introduccion' },
-								{ label: 'Arquitectura', slug: 'progama_extractor/arquitectura_app' },
+								{ label: 'Introducción', slug: 'programa_extractor/introduccion' },
+								{ label: 'Arquitectura', slug: 'programa_extractor/arquitectura_app' },
 							],
 						},
 					],
 				},
 				{
-					label: 'Guia de uso',
-					items: [{ label: 'Introduccion', slug: 'guia-de-uso/introduccion' }],
+					label: 'Guía de uso',
+					items: [{ label: 'Introducción', slug: 'guia-de-uso/introduccion' }],
 				},
 				{
 					label: 'Reference',
