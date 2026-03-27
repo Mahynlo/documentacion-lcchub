@@ -52,7 +52,7 @@ Este repositorio ya incluye un flujo de trabajo de GitHub Actions ([`deploy.yml`
 4. Realiza un *push* a la rama `main` para disparar el flujo de trabajo por primera vez.
 
 **URL de despliegue esperada:**
-👉 [https://mahynlo.github.io/documentacion-lcchub/](https://mahynlo.github.io/documentacion-lcchub/)
+👉 [https://cc-unison.github.io/documentacion-lcchub/](https://cc-unison.github.io/documentacion-lcchub/)
 
 ## 📚 ¿Quieres aprender más?
 
