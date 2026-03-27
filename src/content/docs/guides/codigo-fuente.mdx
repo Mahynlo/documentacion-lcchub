@@ -1,0 +1,43 @@
+---
+title: Código Fuente y Repositorios
+description: Directorio de los repositorios oficiales que conforman el ecosistema del proyecto LCC-HUB.
+---
+
+El proyecto **LCC-HUB** está diseñado con una arquitectura modular y sus componentes principales están alojados enn **CC-unison** en GitHub. Esta separación permite mantener el código organizado, facilitar el trabajo en equipo y realizar despliegues independientes para cada servicio.
+
+A continuación, se detalla la función de cada repositorio y el comando necesario para descargarlo a tu entorno local.
+
+---
+
+## 1. Frontend (Interfaz de Usuario)
+Este repositorio contiene la aplicación web principal construida con **Next.js**, React y Tailwind CSS. Es la cara visible de la plataforma, donde los estudiantes interactúan con el portal, ven los eventos y consultan su progreso académico.
+
+* **Enlace:** [lcchub-dev](https://github.com/CC-unison/lcchub-dev)
+* **Clonar repositorio:**
+  ```bash
+  git clone [https://github.com/CC-unison/lcchub-dev.git](https://github.com/CC-unison/lcchub-dev.git)
+  ```
+
+## 2. Backend (CMS y API)
+Aquí reside el núcleo de datos del proyecto. Construido sobre **Strapi CMS** (Node.js), este servicio se encarga de exponer la API REST, gestionar el contenido de la pagina web y servir como intermediario entre el frontend y el chatbot. Es fundamental para la administración de eventos, usuarios y la integración con el bot.
+
+* **Enlace:** [lcchub-backend-dev](https://github.com/CC-unison/lcchub-backend-dev)
+* **Clonar repositorio:**
+  ```bash
+  git clone [https://github.com/CC-unison/lcchub-backend-dev.git](https://github.com/CC-unison/lcchub-backend-dev.git)
+  ```
+
+## 3. Gestor de Archivos (Extracción de Datos)
+Esta es una herramienta complementaria utilizada para la extracción, manejo y procesamiento de datos. Facilita la ingesta de información y la administración de archivos que nutren las bases de conocimiento del sistema.
+
+* **Enlace:** [LCC-HUB-GESTOR-DE-ARCHIVOS](https://github.com/CC-unison/LCC-HUB-GESTOR-DE-ARCHIVOS)
+* **Clonar repositorio:**
+  ```bash
+  git clone [https://github.com/CC-unison/LCC-HUB-GESTOR-DE-ARCHIVOS.git](https://github.com/CC-unison/LCC-HUB-GESTOR-DE-ARCHIVOS.git)
+  ```
+
+---
+
+:::tip[Recomendación de Organización]
+Para facilitar el desarrollo simultáneo y evitar confusiones con las rutas en tu terminal, te recomendamos crear una carpeta principal (por ejemplo, `lcc-hub-workspace`) en tu computadora y clonar los tres repositorios directamente dentro de ella.
+:::
