@@ -53,6 +53,13 @@ export default defineConfig({
 								{ label: 'Arquitectura', slug: 'programa_extractor/arquitectura_app' },
 							],
 						},
+						{
+							label: 'Servidor',
+							items: [
+								{ label: 'Introducción', slug: 'servidor/introduccion' },
+								{ label: 'Actualizaciones y Mantenimiento', slug: 'servidor/actualizaciones' },
+							],
+						},
 					],
 				},
 				{

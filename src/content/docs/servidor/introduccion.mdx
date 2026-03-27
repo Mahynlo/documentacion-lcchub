@@ -1,0 +1,18 @@
+---
+title: Introducción al Servidor
+description: Descripción de la infraestructura del servidor de LCC-HUB.
+---
+
+## Infraestructura del Servidor
+
+El ecosistema de LCC-HUB, incluyendo sus aplicaciones web, servicios en segundo plano y bases de datos locales, se encuentra alojado en un servidor **Linux** con distribución **Ubuntu**. 
+
+Ubuntu ofrece un entorno estable, seguro y con excelente soporte comunitario para el despliegue de aplicaciones modernas basadas en Node.js, gestores de proceso como PM2 y bases de datos.
+
+### Consideraciones Generales
+
+* **Sistema Operativo:** Ubuntu (Linux).
+* **Acceso:** El acceso al servidor para tareas de mantenimiento, administración y despliegue se realiza exclusivamente a través de **SSH**.
+* **Gestión de Paquetes:** Utilizamos `apt` para la gestión de dependencias del sistema operativo y utilidades de red.
+
+Dado que es un entorno Linux de producción, es fundamental seguir buenas prácticas de seguridad y administración, asegurándose de aplicar los permisos de archivo correctos y de mantener actualizados los paquetes tanto del sistema como de los repositorios del proyecto.

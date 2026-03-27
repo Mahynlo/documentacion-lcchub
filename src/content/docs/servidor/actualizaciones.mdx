@@ -1,0 +1,60 @@
+---
+title: Actualizaciones y Mantenimiento
+description: Guía para realizar actualizaciones de paquetes del servidor y respaldos preventivos.
+---
+
+A medida que el proyecto evoluciona y el sistema operativo recibe parches de seguridad, es necesario realizar actualizaciones en el servidor base (Ubuntu). Dado que el servidor aloja nuestras aplicaciones y bases de datos locales de Strapi, **es estrictamente necesario realizar respaldos previos** para prevenir la pérdida de datos y garantizar una rápida recuperación en caso de falla.
+
+## 1. Procedimiento de Respaldo Previo (Backups)
+
+Antes de actualizar cualquier paquete importante del sistema o de la aplicación, debes asegurar la integridad de la información actual. 
+
+### A) Respaldo de Variables de Entorno (.env)
+Los archivos `.env` contienen credenciales críticas. Guárdalos en un directorio seguro del servidor (fuera del directorio público de los repositorios) o descárgalos localmente a tu máquina por precaución, para no perder el acceso a la base de datos o APIs en caso de corromper el repositorio local.
+```bash
+cp /ruta/al/proyecto/.env /ruta/de/respaldos/env_backup_fecha
+```
+
+### B) Respaldo de la Base de Datos de Strapi
+Es de suma importancia respaldar la base de datos que utiliza el CMS de Strapi antes de actualizar algo. Si utilizas SQLite, realiza una copia directa del archivo de base de datos. Si usas PostgreSQL o MySQL, deberás realizar un dump.
+```bash
+# Ejemplo si usas SQLite:
+cp /ruta/a/strapi/database/data.db /ruta/de/respaldos/strapi_db_backup.db
+```
+
+### C) Respaldo de Fotos y Archivos Subidos (Uploads)
+En Strapi, todos los archivos multimedia cargados por los usuarios (como imágenes para eventos o anuncios) se guardan típicamente en la carpeta `public/uploads`. Realiza una copia comprimida de este directorio para no perder las fotos almacenadas.
+```bash
+tar -czvf /ruta/de/respaldos/uploads_backup.tar.gz /ruta/a/strapi/public/uploads
+```
+
+### D) Subir Cambios a GitHub
+Asegúrate de que cualquier modificación o nueva función desarrollada localmente en el servidor haya sido guardada y subida (*pushed*) al repositorio en GitHub de manera segura antes de realizar actualizaciones globales.
+```bash
+git status
+git add .
+git commit -m "chore: guardando cambios y respaldos pre-actualización"
+git push origin main
+```
+
+---
+
+## 2. Actualización de Paquetes del Servidor (Ubuntu)
+
+Una vez que la base de datos, los archivos multimedia (fotos), las claves del `.env` y el código fuente estén completamente asegurados en otro directorio o en la nube (GitHub), puedes proceder a actualizar libremente el entorno del servidor Linux.
+
+1. **Actualizar la lista de repositorios:**
+   ```bash
+   sudo apt update
+   ```
+2. **Aplicar actualizaciones disponibles a los paquetes instalados:**
+   ```bash
+   sudo apt upgrade -y
+   ```
+3. *(Opcional)* **Actualizar el sistema completo** (remueve dependencias obsoletas):
+   ```bash
+   sudo apt full-upgrade -y
+   sudo apt autoremove -y
+   ```
+
+Una vez finalizado, puedes reiniciar los servicios de PM2 (o incluso reiniciar el servidor base si las actualizaciones del núcleo lo requieren) y verificar que las aplicaciones de frontend y backend se levanten correctamente con acceso a sus variables de entorno.
